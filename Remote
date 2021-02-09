@@ -1,0 +1,72 @@
+{
+    "isshow":"true",  是否展示弹窗，总开关 备选值true，false
+    "cancancel":"false",  是否可以通过点击外部来取消弹窗  备选值true，false
+    "version":"5",  弹窗版本号：可以把数字改大来强制开启弹窗，无论app中是否点了“不在显示”
+    "globalbgcolor":"#FFFFFFFF",  全局背景颜色，RGB 颜色，不同颜色百度
+    "titleset":{
+        "name":"这是标题啊",                           标题文字
+        "textcolor":"#FF03DAC5",          标题文字颜色
+        "bgcolor":"#FFF442FF",          标题背景颜色
+        "textsize":"30"                          标题文字大小，整数
+    },
+    "contentset":{
+        "textcolor":"#FFFFFFFF",           正文文字颜色
+        "bgcolor":"#FF018786",                正文背景颜色
+        "textsize":"18",正文文字大小，整数
+        "textgravity":"center", 正文居不居中  center表示居中 start表示做对齐
+        "content":[
+            {
+                "text":"第1行文字"  第一行文字内容
+            },
+            {
+                "text":"第2行文字"
+            },
+
+            {
+                "text":"第3行文字"   可以自主添加第n行文字，注意仿照这里的格式，注意首位无英文逗号，中                                                                                间有英文逗号
+            }
+        ]
+    },
+    "buttonset":[
+        {
+            "name":"不再显示",                              左按钮文字
+            "textcolor":"#FFBB86FC",                        左按钮文字颜色
+            "bgcolor":"#FF03DAC5",                        左按钮背景颜色
+            "textsize":"16",                                                左按钮文字大小
+            "visible":"true",                                        左按钮是否显示
+            "action":""
+        },
+        {   
+            "name":"取消",                            中间按钮文字
+            "textcolor":"#FF223345",                                        下同上面
+            "bgcolor":"#FFFFFFFF",
+            "textsize":"16",
+            "visible":"true",
+            "action":""
+        },
+        {
+            "name":"进群/链接",                                右按钮文字
+            "textcolor":"#FF223345",                        下同
+            "bgcolor":"#FFFFFFFF",
+            "textsize":"16",
+            "visible":"true",
+            "action":"qqgroup@PUnHK52MzYA73306Xand9CY76L6ffcI3"
+            这里可以选择是跳转到QQ某个群还是跳转到某个链接
+
+            （都用英文输入法）                   1. 群格式第一种：
+                为qqgroup@Key，这个Key需要去https://qun.qq.com/join.html获取
+                登录后点击Android，找到Key字符串即可，如：
+                找到PUnTw52MzYA7CY0KXand9CY76L6ffcI3
+                那么就应该写：
+                "action":"qqgroup@PUnHK52MzYA73306Xand9CY76L6ffcI3"
+               群格式第二种：
+                    比如你的QQ群号是12345678
+                     那么就应该写：
+                "action":"qqgroup@12345678"
+
+            2.链接格式为link@https://www.baidu.com/
+            "action":"link@https://www.baidu.com/"
+
+        }
+    ]
+}
