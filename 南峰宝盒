@@ -6,7 +6,7 @@ SuperDialog 3.0
 
 xbs mode=1
 xbs isWithNoLongerTip=true
-xbs isOneDayOneTip=true
+xbs isOneDayOneTip=false
 xbs isCancelToExit=true
 
 /**
