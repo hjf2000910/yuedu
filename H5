@@ -12,7 +12,7 @@
 </head>
 <body>
 <p>&nbsp;</p><div align="center"><p style="font-size: 8vw; color: #9c27b0;">温馨提示</p>
-
+<p>
     <form action="http://vip.biancheng.net/login.php" method="post">
      <input type="image" 
       src="https://s1.ax1x.com/2020/04/21/JG2NMn.png" 
@@ -21,6 +21,7 @@
       onclick="app.open('https://nfhjf.club/post/14')"
      />
 </form>
+</p>
 
 <p style="font-size: 6vw; color: #009688;">仅供学习交流，<br />严禁用于商业用途，<br />请于24小时内删除</p><br />
 
