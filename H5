@@ -21,7 +21,7 @@
         
         <button style="color:#448aff;" class="button" onclick="app.close()">进入软件</button>
      &nbsp;
-    <button style="color:#FF5252;" class="button" onclick="app.open('https://nffb.lanzoux.com/b315924')"><img src="https://s1.ax1x.com/2020/04/21/JG2NMn.png" alt="" width="254" height="109" />更多软件</button>
+    <button style="color:#FF5252;"<img src="https://s1.ax1x.com/2020/04/21/JG2NMn.png" alt="" width="254" height="109" /> class="button" onclick="app.open('https://nffb.lanzoux.com/b315924')">更多软件</button>
      &nbsp;
     <button style="color:#607D8B;" class="button" onclick="app.open('https://www.baidu.com/这里修改成自己的qq群地址')">加入Q群</button>
    
