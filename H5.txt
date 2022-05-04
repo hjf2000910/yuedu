@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+      <meta charset='utf-8'>
+    <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover"/>
+    <style>
+	 body {
+		 display: flex; 
+		 height: 100vh; 
+		 justify-content: center;
+		  align-items: center;
+		  /*
+		  这里是背景图片 https://imgtu.com/ 免费的图床平台
+		  */
+		  background: url("https://s1.ax1x.com/2022/04/07/qxBA3D.png") 0/cover fixed;
+		  font-family: "Lato"; 
+		} 
+	 .login-form { 
+		display: flex; 
+		flex-direction: column; 
+		align-items: center; 
+		padding: 3em; 
+		background: rgba(225, 225, 225, 0); 
+		color: white; 
+		border-radius: 10px; 
+		box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5); 
+	} 
+	 .login-form h1 { 
+		font-size: 2.5em; 
+		margin-bottom: 0.3em; 
+		padding: 12px 0; 
+	} 
+	.login-form .form-field { 
+		position: relative; font-size: 20px; 
+		border-bottom: 1px solid white; 
+		margin: 20px 0 8px 0; transition: 0.4s; 
+	} 
+	.login-form .form-field::after { 
+		position: absolute; content: ""; 
+		width: 100%; height: 2px; 
+		bottom: -1px; left: 0; 
+		background: #DC143C; 
+		transform-origin: left; 
+		transform: scaleX(0); 
+		transition: 0.4s ease; 
+	} 
+	.login-form .form-field:focus-within::after { 
+		transform: scaleX(1); 
+	} 
+	.login-form .form-field input { 
+		border: none; outline: none; 
+		background: transparent; 
+		color: white; 
+		padding-left: 10px; 
+	} 
+	
+	
+	.login-form .btn { 
+		position: relative; 
+		outline: none; 
+		background: transparent; 
+		color: white; 
+		border: 2px solid #3398db; 
+		width: 100%; font-size: 1.2em; 
+		margin: 36px 0 18px 0; 
+		padding: 6px 0; 
+		cursor: pointer; 
+		overflow: hidden; transition: 0.5s; 
+	} 
+	
+		input::-webkit-input-placeholder{ 
+	        color: #A3A3A3; 
+	    } 
+		
+        .button{
+            background-color: #FFFFFF;
+			margin-right:10px;
+            border: none;
+            font-size:16px;
+			float:center;
+        }
+    </style>
+</head>
+  <body>
+    <form class="login-form" action="javascript:void(0);">
+      <h1>T3网络验证</h1>
+      <a>这里是对接的T3网络验证单码验证</a>
+      <div class="form-field">
+        <input  style="t" type="text" name="code" id="code" class="form-field" placeholder="请输入你的激活码">
+	  </div>
+
+	  <button type="submit" class="btn" onclick="Verify(code.value);">登录</button>
+	  <button type="submit" class="btn" onclick="app.open('mqqwpa://im/chat?chat_type=wpa&uin=换成自己的QQ号&version=1');">客服</button>
+
+      <button type="submit" class="btn" onclick="app.open('https://dev.eydata.net/换成自己的卡密购买地址');">购卡</button>
+	</form>
+    <script>
+        var key =app.getstring("code");
+		if(key!=""){
+            document.getElementById('code').value=key;
+            /*
+            下面Verify(key);这一行代码是自动登录功能 删除后就不是自动登录了
+            */
+            Verify(key);
+	    }
+		function Verify(key) {
+			if(key==""){
+			    app.toast("请输入卡密");
+			}else{
+				app.newdialog('正在登录卡密...');
+				/*
+				网络验证平台：https://www.t3yanzheng.com/
+				这个平台只需要充值9元
+			    使用方法:
+                第一步 创建 程序管理-创建程序  要求关闭ip验证和更新开关
+                第二步 找到 程序管理-程序列表-操作-接口列表-接口名称{单码卡密登录}-调用地址
+                第三步 替换 http://w.t3data.net/69347F25BA3219D12
+                */
+			    var data=JSON.parse(app.post('http://w.t3data.net/69347F25BA3219D12','imei='+app.getuserid()+'&kami='+key+'&print=json'));
+			    app.closedialog();
+				if(data.code=='200'){
+	                app.setstring("code",key);
+	                app.close();
+                    app.toast('到期时间:'+data.end_time);
+				}else{
+                    app.toast(data.msg);
+				}
+			}
+		}
+
+        /*
+        下面这两行是防止长按文字选择复制  你可以删除
+        */
+        document.documentElement.style.webkitUserSelect='none';
+        document.documentElement.style.webkitTouchCallout='none';
+	</script>
+  </body>
+</html>
