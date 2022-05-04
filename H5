@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head>
+    <meta charset='utf-8'>
+    <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover"/>
+    <style>
+        .button{
+            background-color: #FFFFFF;  /*按钮背景颜色  #FFFFFF是白色 更多百度搜索[rgb颜色]*/
+			color: #448aff;             /*按钮字体颜色  #448aff是蓝色 更多百度搜索[rgb颜色]*/
+            border: none;               /*按钮边框隐藏*/
+            font-size: 5.5vw;           /*字体大小自适应6vw*/
+			float:right;                /*布局[right]是右边  如果设置[center]是中间*/
+        }
+    </style>
+</head>
+<body>
+
+<div   align="center">
+    <p style="font-size:8vw;">顶部标题</p>
+    <p style="font-size:6vw;">仅供学习交流<br>严禁用于商业用途<br>请于24小时内删除<br></p>
+    <br>
+    <button class="button" onclick="app.close()">进入软件</button>
+    &nbsp;
+    <button class="button" onclick="app.open('https://www.baidu.com/这里修改你的网盘地址等等')">更多软件</button>
+    &nbsp;
+    <button class="button" onclick="app.open('https://www.baidu.com/这里修改成自己的qq群地址')">加入Q群</button>
+    <br>
+    <br>
+</div>
+</body>
+<script>
+        /*
+        下面这两行是防止长按文字选择复制  你可以删除
+        */
+    document.documentElement.style.webkitUserSelect='none';
+    document.documentElement.style.webkitTouchCallout='none';
+</script>
+</html>
