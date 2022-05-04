@@ -3,34 +3,158 @@
     <meta data-n-head="true" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,viewport-fit=cover"/>
     <style>
         .button{
-            background-color: #FFFFFF;  /*按钮背景颜色  #FFFFFF是白色 更多百度搜索[rgb颜色]*/
-			color: #448aff;             /*按钮字体颜色  #448aff是蓝色 更多百度搜索[rgb颜色]*/
-            border: none;               /*按钮边框隐藏*/
-            font-size: 5.5vw;           /*字体大小自适应6vw*/
-			float:right;                /*布局[right]是右边  如果设置[center]是中间*/
+            background-color: #FFFFFF;
+            border: none;
+            font-size:5vw;
+	    float:center;
         }
     </style>
 </head>
 <body>
 
-<div   align="center">
-    <p style="font-size:8vw;">顶部标题</p>
-    <p style="font-size:6vw;">仅供学习交流<br>严禁用于商业用途<br>请于24小时内删除<br></p>
+
+
+<div align="center">
+    <p style="font-size:6vw;color:#9C27B0;">温馨提示</p>
+    <p style="font-size:5vw;color:#009688;">仅供学习交流，<br>严禁用于商业用途，<br>请于24小时内删除<br>点击一些功能没有反应,其实已经生效了<br>这个显示不全请上下滚动一下</p>
+
+    <button style="color:#009688;" class="button" onclick="get('http://www.baidu.com')">取网页GET源码</button>
+    &nbsp;
+    <button style="color:#FF5252;" class="button" onclick="post('http://www.baidu.com')">取网页POST源码</button>
+
     <br>
-    <button class="button" onclick="app.close()">进入软件</button>
+    <br>
+    <button style="color:#607D8B;" class="button" onclick="app.setcopy('复制的内容')">复制内容到剪切板</button>
+
     &nbsp;
-    <button class="button" onclick="app.open('https://www.baidu.com/这里修改你的网盘地址等等')">更多软件</button>
+    <button style="color:#448aff;" class="button" onclick="app.toast(app.getcopy())">取剪切板内容</button>
+
+    <br>
+    <br>
+    <button style="color:#607D8B;" class="button" onclick="app.share('分享的内容')">分享内容</button>
     &nbsp;
-    <button class="button" onclick="app.open('https://www.baidu.com/这里修改成自己的qq群地址')">加入Q群</button>
+    <button style="color:#448aff;" class="button" onclick="app.share('分享的内容','com.tencent.mobileqq','com.tencent.mobileqq.activity.JumpActivity')">分享内容到QQ</button>
+    <br>
+    <br>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.setstring('key','内容')">保存文本</button>
+
+    &nbsp;
+    <button style="color:#448aff;" class="button" onclick="app.toast(app.getstring('key'))">取已保存的文本</button>
+
+    <br>
+    <br>
+    &nbsp;
+    <button style="color:#009688;" class="button" onclick="app.newdialog('进度对话框内容')">创建进度对话框</button>
+
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.setdialog('内容')">改变进度对话框内容</button>
+    &nbsp;
+    <button style="color:#448aff;" class="button" onclick="app.closedialog()">关闭进度对话框</button>
+    <br>
+    <br>
+    &nbsp;
+    <button style="color:#009688;" class="button" onclick="app.toast(app.getpackage())">取当前软件包名</button>
+    &nbsp;
+    <button style="color:#FF5252;" class="button" onclick="app.toast(app.getuserid())">取设备唯一ID</button>
+    <br>
+    <br>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.toast(app.getmd5('测试'))">取MD5值</button>
+    &nbsp;
+    <button style="color:#009688;" class="button" onclick="vpn()">检测抓包</button>
+    &nbsp;
+    <button style="color:#448aff;" class="button" onclick="app.close()">关闭弹窗</button>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.exit()">结束软件</button>
+    &nbsp;
+    <button style="color:#448aff;" class="button" onclick="app.toast(app.appname(app.getpackage()))">取app名称</button>
+    &nbsp;
+    <br>
+    <br>
+    <button style="color:#FF5252;" class="button" onclick="app.closepng()">禁止截图</button>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.open('http://www.baidu.com')">打开浏览器</button>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.topon()">打开顶部进度条</button>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.topoff()">关闭顶部进度条</button>
+    &nbsp;
+    <br>
+    <br>
+    <button style="color:#607D8B;" class="button" onclick="app.setheight(400)">设置弹窗高度400</button>
+    &nbsp;
+    <button style="color:#607D8B;" class="button" onclick="app.setheight(500)">设置弹窗高度500</button>
+
+    <br>
+    <br>
+    <a href="https://www.lanzoui.com/b0c8jqyj">内置访问</a>
+
     <br>
     <br>
 </div>
 </body>
 <script>
-        /*
-        下面这两行是防止长按文字选择复制  你可以删除
-        */
+/*
+关闭弹窗		    没有返回值		app.close();
+打开浏览器访问百度  没有返回值		app.open('http://www.baidu.com');
+禁止截图   	    	没有返回值		app.closepng();
+取网页GET源码 		返回文本		app.get('http://www.baidu.com');
+复制内容到剪切板 	没有返回值		app.setcopy('复制的内容');
+分享内容 			返回false true	app.share('分享的内容');
+分享内容到QQ 		返回false true	app.share('分享的内容','com.tencent.mobileqq','com.tencent.mobileqq.activity.JumpActivity');
+取已保存的文本		返回文本		app.toast(app.getstring('key'));
+保存文本 			没有返回值 	 	app.setstring('key','内容');
+创建进度对话框	 	没有返回值		app.newdialog('进度对话框内容');
+改变进度对话框内容	没有返回值		app.setdialog('内容');
+关闭进度对话框		没有返回值		app.closedialog();
+结束软件 			没有返回值 		app.exit();
+取app名称			返回空=不存在	app.appname('app包名');
+弹窗提示			没有返回值		app.toast('提示内容');
+取当前软件包名		返回文本		app.getpackage();
+取设备唯一ID		返回文本		app.getuserid();
+取MD5值				返回文本		app.getmd5('测试');
+检测抓包			返回false true	app.isvpn();
+打开顶部进度条     	没有返回值		app.topon();
+关闭顶部进度条     	没有返回值		app.topoff();
+设置弹窗高度      	没有返回值		app.setheight(500);
+
+开发注意：不建议使用px 因为手机分辨率不一样  建议使用vw
+
+*/
+	function vpn(){
+		if(app.isvpn()){
+			app.toast('有vpn软件或wifi代理运行');
+		}else{
+			app.toast('一切正常');
+		}
+    }
+	
+    
+	
+	function get(url){
+		app.newdialog('正在加载数据中...');
+		/*app.get("http://www.baidu.com");*/
+        var data=app.get(url);
+		app.closedialog();
+		/*var data=app.get(url,"User-Agent:Mozilla/4.0\nCookie:设置协议\n");
+		var data=app.get(url,"User-Agent:Mozilla/4.0\nCookie:设置协议\n",3000);
+		3000是超时时间3秒 默认是3秒
+		data是返回的数据*/
+		app.toast(data);
+    }
+	function post(url){
+		app.newdialog('正在加载数据中...');			
+        var data=app.post(url,"post=p&POST数据");
+		app.closedialog();							
+		/*var data=app.post(url,"post=p&POST数据","User-Agent:Mozilla/4.0\nCookie:设置协议\n");
+		var data=app.post(url,"post=p&POST数据","User-Agent:Mozilla/4.0\nCookie:设置协议\n",3000);
+		3000是超时时间3秒 默认是3秒
+		data是返回的数据*/
+		app.toast(data);
+    }
+	
     document.documentElement.style.webkitUserSelect='none';
     document.documentElement.style.webkitTouchCallout='none';
-</script>
+    </script>
 </html>
