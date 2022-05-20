@@ -1,0 +1,130 @@
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; } 聽 /*鍘绘帀input绛夎仛鐒︽椂鐨勮摑鑹茶竟妗�*/
+ul, ol, li { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","瀹嬩綋";}
+select, input { vertical-align:middle;}
+select, input, textarea { font-size:12px; margin:0; }
+textarea { resize:none; } /*闃叉鎷栧姩*/
+img {border:0; vertical-align:middle; } 聽/* 聽鍘绘帀鍥剧墖浣庢祴榛樿鐨�3鍍忕礌绌虹櫧缂濋殭锛屾垨鑰呯敤display锛歜lock涔熷彲浠�*/
+table { border-collapse:collapse; }
+body {
+聽background-color:#fff;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,"PingFang SC","Helvetica Neue", Helvetica,  "Hiragino Sans GB", "Microsoft YaHei",SimSun, sans-serif;
+}
+.clearfix:before,.clearfix:after {/*娓呮娴姩*/
+聽content:"";
+聽display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{*zoom:1;/*IE/7/6*/}
+p{line-height: 28px;}
+
+s,i,em{font-style:normal;text-decoration:none;}
+html {font-size: 14px;}
+/* flex甯冨眬  space-between*/
+.flex {
+	display: flex;
+	justify-content: space-between;
+}
+/* flex妯帓甯冨眬 姝ｅ悜*/
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+/* flex妯帓甯冨眬 鍙嶅悜*/
+.flex-row-re {
+	display: flex;
+	flex-direction: row-reverse;
+}
+/* flex绔栨帓甯冨眬 */
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+/*align-self: flex-end  */
+.self-end {
+	align-self: flex-end;
+}
+/* 钃濆簳鐧藉瓧 */
+.back-white {
+	border: 1px solid #1953ff;
+	background-color: #1953ff;
+	border-radius: 5px;
+	color: #fff;
+}
+/* 钃濊竟钃濆瓧 */
+.border-blue {
+	border: 1px solid #1953ff;
+	border-radius: 5px;
+	color:#1953FF
+}
+
+/* 钃濊壊瀛椾綋 */
+.blue-text {
+	color: #1953FF
+}
+/* 鐏拌壊瀛椾綋 */
+.grey {
+	color: #838c99
+}
+/* 鏂囧瓧灞呬腑 */
+.center {
+	text-align:center
+}
+/* h1~h6 */
+.h1, .h2, .h3, .h4{font-weight: 800; }
+.h1 {
+	font-size: 60px;
+}
+.h2 {
+	font-size: 30px;
+}
+.h3 {
+	font-size: 25px;
+}
+.h4 {
+	font-size: 20px;
+}
+.h5 {
+	font-size: 16px;
+}
+/* 澶栬竟璺濆悜涓� */
+.mg-b-10 {
+	margin-bottom:10px;
+} 
+.mg-b-20 {
+	margin-bottom:20px;
+} 
+.mg-b-30 {
+	margin-bottom:30px;
+} 
+.mg-b-50 {
+	margin-bottom:50px;
+}
+.mg-b-70 {
+	margin-bottom:70px;
+}
+.mg-b-100 {
+	margin-bottom:100px;
+}
+
+/* 澶栬竟璺濆悜宸� */
+.mg-l-10 {
+	margin-left:10px;
+} 
+/* 澶栬竟璺濆悜鍙� */
+.mg-r-10 {
+	margin-right:10px;
+} 
+
+.only-index-block {
+	display:none;
+}
+.no-warp {
+	white-space: nowrap
+}
+.els {
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap
+}
