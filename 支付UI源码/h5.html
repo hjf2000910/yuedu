@@ -1,0 +1,300 @@
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<title>绝版套餐话费预存系统</title>
+
+	<link rel="stylesheet" href="https://lib.baomitu.com/layui/2.6.8/css/layui.css">
+	<link rel="stylesheet" href="static/global.css">
+	<link rel="stylesheet" type="text/css" href="static/header.css">
+	<link rel="stylesheet" type="text/css" href="static/public.css">
+	<link rel="stylesheet" href="static/h5.css" media="screen and (max-width: 568px)">
+	<link rel="stylesheet" href="static/min-foot.css" media="screen and (max-width: 568px)">
+	<link rel="stylesheet" type="text/css" href="static/pc.css" media="screen and (min-width: 569px)">
+	<link rel="stylesheet" type="text/css" href="static/foot.css" media="screen and (min-width: 569px)">
+	<link rel="stylesheet" href="static/index.css">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <meta http-equiv="Expires" content="0">
+
+	<link rel="stylesheet" type="text/css" href="static/min-paydemo.css">
+<link id="layuicss-laydate" rel="stylesheet" href="https://lib.baomitu.com/layui/2.6.8/css/modules/laydate/default/laydate.css?v=5.3.1" media="all"><link id="layuicss-layer" rel="stylesheet" href="https://lib.baomitu.com/layui/2.6.8/css/modules/layer/default/layer.css?v=3.5.1" media="all"><link id="layuicss-skincodecss" rel="stylesheet" href="https://lib.baomitu.com/layui/2.6.8/css/modules/code.css?v=2" media="all"></head>
+<body style="background-color: #FFFFFF;">
+<div class="page">
+	<script src="https://lib.baomitu.com/layui/2.6.8/layui.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/min-head.css" media="screen and (max-width: 568px)">
+	<div class="header-container">
+
+		<div class="links-drawer-box ">
+			<div class="drawer-line-top"></div>
+			<div class="drawer-line-bottom"></div>
+		</div>
+		<script src="static/topnav.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/md5.min.js" type="text/javascript" charset="utf-8"></script>
+	</div>
+
+	<div class="container">
+		<div class="input-box">
+			<div class="logo-box">
+				绝版套餐话费预存系统
+			</div>
+			<div class="amount-input">
+				<div class="company">
+					<img src="static/qian.png" alt="">
+
+				</div>
+				<!-- <p class="header">支付金额：</p> -->
+				<input class="input" type="number" value="0.01" oninput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" onblur="b=this.value;b=(b+'').replace(/^0+\./g,'0.');b.match(/^0+[1-9]+/)?b=b.replace(/^0+/g,''):b;this.value=Number(b)?b:0;">
+			</div>
+			<p class="tips-text">请在输入框内输入预存金额</p>
+		</div>
+		<div class="dex-box">
+			<div class="dex-text">
+				<p style="margin-bottom: 15px; font-size: 20px; font-weight: 900">
+					
+				</p>
+				<p>
+
+</p>
+<p>请在输入框内输入预存金额</p><p>确认预存</p><p>话费预存支持微信支付宝支付</p>
+
+
+
+			</div>
+			<div class="pay-button">
+				<p id="buttonText">支付 ￥0.01</p>
+			</div>
+		</div>
+	</div>
+	<div class="mask" style="visibility: hidden; opacity: 0;"></div>
+	<div class="pay-window" style="bottom: -220px;">
+		<div class="pay-box">
+			<div class="wxpay paytest">
+				<div class="pay-item-box" id="wxpay">
+					<div class="icon">
+						<img src="static/wx.png" alt="wxpay">
+					</div>
+					<p>微信支付</p>
+				</div>
+			</div>
+			<div class="hr"></div>
+			<div class="alipay paytest">
+				<div class="pay-item-box" id="alipay">
+					<div class="icon">
+						<img src="static/zfb.png" alt="alipay">
+					</div>
+					<p>支付宝支付</p>
+				</div>
+			</div>
+		</div>
+		<div class="cancel">取消</div>
+	</div>
+</div>
+<div class="none-show">
+	<img src="static/pc-tips.svg" alt="pc-tips">
+	<p>该页面为H5支付体验，请在移动端打开</p>
+</div>
+<script>
+	layui.cache.page = '';
+	layui.config({
+		version: new Date().getTime()
+		,base: '/res/mods/'  //这里实际使用时，建议改成绝对路径
+	}).extend({
+		fly: 'index'
+	}).use(['layer', 'laytpl'], function() {
+		var $ = layui.$
+				,layer = layui.layer;
+
+		const userAgent = navigator.userAgent;
+		var inputValue = $(".input").val(); //初始value
+
+		function inputFun() {
+			//公共方法，按钮文字同步
+			$("#buttonText").html("支付" + " " + "￥" + inputValue);
+		}
+		inputFun(); //初始调用
+
+		$(".input").bind("input propertychange", function () {
+			//输入实时触发
+			inputValue = $(".input").val(); //重置value
+			var _this = $(this);
+			var inputLength = _this.val().length;
+			var inputWidht = parseInt(inputLength) * 11.5 + 25;
+			var companyWidth = $(".company").outerWidth();
+			_this.css("width", inputWidht + "px"); //输入框宽度随内容变化
+			$(".amount-input").css("width", inputWidht + companyWidth + 20 + "px"); //容器宽度实时变化
+			inputFun(); //调用按钮文字同步方法
+		});
+		$("input").blur(function () {
+			//失焦时删除多输入的0，然后同步到按钮上
+			inputValue = $(".input").val();
+			inputFun();
+		});
+		$(".pay-button").on("click", function () {
+			$(".mask").css({
+				visibility: "visible",
+				opacity: 1,
+			});
+			$(".pay-window").css({
+				bottom: "10px",
+			});
+		});
+		$(".cancel").on("click", function(){
+			$(".mask").css({
+				visibility: "hidden",
+				opacity: 0,
+			});
+			$(".pay-window").css({
+				bottom: "-220px",
+			});
+		});
+		$(".mask").on("click", function(){
+			$(".mask").css({
+				visibility: "hidden",
+				opacity: 0,
+			});
+			$(".pay-window").css({
+				bottom: "-220px",
+			});
+		});
+
+		// 选择微信支付
+		$("#wxpay").on('click', function () {
+			pay("QR_CASHIER","WX_JSAPI");
+		});
+
+		// 选择支付宝支付
+		$("#alipay").on('click', function () {
+			pay("QR_CASHIER","ALI_JSAPI");
+		});
+		function getSign(params,appSecret) {
+			let content;
+			if (typeof params == "string") {
+				content = params
+			} else if (typeof params == "object") {
+				var arr = [];
+				for (var i in params) {
+					arr.push(i + "=" + params[i]);
+				}
+				content = arr.join("&")
+			}
+			var urlStr = content.split("&").sort().join("&");
+			var newUrl = urlStr + "&key=" + appSecret;
+			return md5(newUrl);
+		}
+
+		// 发起支付
+		function pay(wayCode,t){
+			let amount = inputValue;
+			const reg = /^([1-9]\d{0,4}|0)(\.\d{1,2})?$/;
+			if (!amount || !reg.test(amount) || amount <= 0) {
+				layer.alert('请输入正确的金额，0-100000之间最多两位小数');
+				return ;
+			}
+
+			var reqData = {};
+			reqData.mchNo = 'M1649838582';
+			reqData.appId = '2021001197680273';
+			reqData.currency = 'cny';
+			reqData.amount = parseInt(amount*100);
+			reqData.wayCode = wayCode;
+			reqData.mchOrderNo = genOrderNo(1000, 9999);
+			reqData.subject = "H5端支付接口演示";
+			reqData.body = reqData.subject;
+			reqData.signType = 'MD5';
+			reqData.reqTime = new Date().getTime();
+			reqData.version = '1.0';
+			var key = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8hsZXS1rU8z7gQHkBi2OG8nv0GtAi/MwhIEVJuttdMymew4o8rNTIxye5lOfgcpUZG1k2O3kfpMcT5qV9Jx313sq7joO9ns/v2uPkfGydaEo5HDbIDcop6c/dDKaCKAR82jokRSJgT/C3gNiQdjkM86Tkq4OdPppHIHGmP5WLnF8n2WSDl9ZOrYJGU00pPUAeWJsvF0J9K4D/JchDpF1pTpkJZYLezFOj/z3UHcLMqNObteqCuWekeTqqNdecgVYAL0wSIO1wtaaxgUHaobuTUFvC8WZJa8hxgnqV6KSFPkLfokxbRowGSawDf4fRH8tZqqZGeoFOukNaMB5axvmLAgMBAAECggEBAKnFUI1B3a0Q05lMVevPIzRd3sPG9ZHcRtK55ctsiqiWLy+6dR0IoqGfvqU/c8RKSvwOBbtxuTSGxYOlW3elpzRHihd2UiqK/kPHwRt79K+XP+fIAYkL6fbuh/JOtw9UjB4Gwv7whvFma6ZEUEFfRSblraMC1QXgXzwX+mA0uC28emTik+APpDl+yvl3PhJPV/RlkB0Gse6lgHgHPMkWupwLTx8jTwQDsMMfTJqGSr68PNs6a/u1s/qOfVnMXKb7wk1LKhGzu4f8NwGcvoFjaI5OBQ5lNRg7HVmu+VGnEchKQgzR9W2CA0PvFr5EV7Uz3sj/hmV3uAdJcVqdVlmzyJECgYEA5XPEn/pFPNLeH7p667FenpHcuhh5Xa9Nx1tGtirtQGv3u8fjS88igbl6MDd0ZsuOuKEJX0Blh7aqIhf/Rt5gVlzP0a5XDpWY3BfCDrkhSbDH5xqw9uBsRgr4Pc+ol3fe+JmULqfQAU40JJvmKDfMyxiadwlrmmDpArJPkaiRcUkCgYEA0lbPsdekfGywTZS0zxogBoua/dlrvbcibzGSyKYMpnq4ys9WcCGfcw4VpN6WPeizyejGenZ7R7DTu8FjIjc7d1iru95Td30r2QP/E6EyQMzju6jn0mUzn+2pzrKHeEnB9GmHchgMgKxRkaLHR581QLwxWWASZ6EmduzGUuVKKDMCgYAfS+IW3AETocNwWnQnr8KzKDwOGgZ708xtE7MaZ9KChfd9Ym9LSM5xGUZkSzwSRVOLNVPc7SCsGSstiU5lcTF8th4WgIwZTihSZN8wOOokbftmN0rJ8aRzDU38yFU7i7sa93+xuWvysaMFF0qWU74YOZvf/qXxoaRGnOGjgXWNGQKBgGNNEKjJQaJsPZ+iwOm1T8FHT1jguHjMaLlOEhogKoC+F1fIIuq1NO3AjH9VhmCb56U++9T88p6Z4JwXZJHWuYBSoGEFSSp0Mas2s8m0pGDrWehSiX9Ov9yU+0HWDxa+245j88ntiJmGwMucqbAqfZ2eOz4SmR3LerlSdx7TmPr5AoGAC0QRgpoGuW9w3SKbDk8Y83039t4DXZcIq70M5J/2DYmUj7nByOVXKWFKQjiupLHizqR76HL9gAcNtO9uwHIEWGVkc8gCB7AGcZoUSpl0i7qBqqJlz1q8/1YnVF48jOZ8TOH+IJSTLCD1+DGYez1cj5ZYshtQjLRFCzYopaiM/WA=';
+			reqData.sign = getSign(reqData,key);
+
+			$.ajax({
+				url: 'https://openapi.alipay.com/gateway.do',
+				data: reqData,
+				type: 'post',
+				success: function (res) {
+					if(res.code == 0) {
+						const data = res.data;javascript:;
+						const payDataType = data.payDataType;
+						const payData = data.payData;
+
+						if (wayCode == "ALI_WAP" && userAgent.indexOf("MicroMessenger") >= 0) {
+							location.href = "/zhifu/tips_browser.html?payUrl=" + encodeURIComponent(payData);
+						}else if (wayCode == "WX_H5" && userAgent.indexOf("AlipayClient") >= 0) {
+							location.href = "/zhifu/tips_browser.html?payUrl=" + encodeURIComponent(payData);
+						}else if(payDataType == 'payurl') {
+							if(t=='WX_JSAPI'){
+								if (userAgent.indexOf("MicroMessenger") >= 0){
+									location.href = payData;
+								}else{
+									layer.confirm('支付地址复制成功，点击允许打开微信APP，请到微信里面粘贴', {
+										btn: ['确认','取消'] //按钮
+									}, function(){
+										copyText(payData);
+										location.href = "weixin://";
+									}, function(index){
+										layer.close(index)
+									});
+								}
+
+							}
+							if(t=='ALI_JSAPI'){
+								location.href = "alipays://platformapi/startapp?appId=20000067&url="+encodeURIComponent(payData);
+								
+							}
+						}
+
+					}else {
+						layer.msg(res.msg);
+					}
+				}, error: function () {
+					layer.alert('接口服务异常');
+				}
+			});
+		}
+		const copyText = (text) => {
+			// 数字没有 .length 不能执行selectText 需要转化成字符串
+			const textString = text.toString();
+			let input = document.querySelector('#copy-input');
+			if (!input) {
+				input = document.createElement('input');
+				input.id = "copy-input";
+				input.readOnly = "readOnly";        // 防止ios聚焦触发键盘事件
+				input.style.position = "absolute";
+				input.style.left = "-1000px";
+				input.style.zIndex = "-1000";
+				document.body.appendChild(input)
+			}
+			input.value = textString;
+			// ios必须先选中文字且不支持 input.select();
+			selectText(input, 0, textString.length);
+			if (document.execCommand('copy')) {
+				document.execCommand('copy');
+				alert('已复制到粘贴板');
+			}else {
+				console.log('不兼容');
+			}
+			input.blur();
+			// input自带的select()方法在苹果端无法进行选择，所以需要自己去写一个类似的方法
+			// 选择文本。createTextRange(setSelectionRange)是input方法
+			function selectText(textbox, startIndex, stopIndex) {
+				if (textbox.createTextRange) {//ie
+					const range = textbox.createTextRange();
+					range.collapse(true);
+					range.moveStart('character', startIndex);//起始光标
+					range.moveEnd('character', stopIndex - startIndex);//结束光标
+					range.select();//不兼容苹果
+				} else {//firefox/chrome
+					textbox.setSelectionRange(startIndex, stopIndex);
+					textbox.focus();
+				}
+			}
+		};
+		// 生成订单号
+		function genOrderNo(min, max) {
+			return "M" + new Date().getTime() + Math.floor(Math.random()*(max-min) + min);
+		}
+
+	})
+</script>
+
