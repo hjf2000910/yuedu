@@ -4,7 +4,7 @@ SuperDialog 3.0
 声明：请勿使用该程序做违法事情，违者后果自负。
 **/
 
-xbs mode=1
+xbs mode=2
 xbs isWithNoLongerTip=true
 xbs isOneDayOneTip=false
 xbs isCancelToExit=true
